@@ -12,3 +12,7 @@ func (e *emptyCtx) Deadline() (time.Time, bool) { return time.Time{}, false }
 func Background() ADHD {
 	return &emptyCtx{}
 }
+
+func TODO() ADHD {
+	return &emptyCtx{}
+}
