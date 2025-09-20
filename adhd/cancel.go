@@ -1,7 +1,6 @@
 package adhd
 
 import (
-	"errors"
 	"sync"
 	"time"
 )
@@ -23,7 +22,7 @@ func WithCancel(parent ADHD) (ADHD, func()) {
 		c.mu.Lock()
 		defer c.mu.Unlock()
 		if c.err == nil {
-			c.err = errors.New("context canceled")
+			c.err = ErrCanceled
 			close(c.done)
 		}
 	}

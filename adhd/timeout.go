@@ -1,7 +1,6 @@
 package adhd
 
 import (
-	"errors"
 	"time"
 )
 
@@ -20,7 +19,7 @@ func WithDeadline(parent ADHD, deadline time.Time) (ADHD, func()) {
 	d := time.Until(deadline)
 	if d <= 0 {
 		dc.mu.Lock()
-		dc.err = errors.New("deadline exceeded")
+		dc.err = ErrDeadlineExceeded
 		close(dc.done)
 		dc.mu.Unlock()
 		return dc, cancel
@@ -30,7 +29,7 @@ func WithDeadline(parent ADHD, deadline time.Time) (ADHD, func()) {
 		dc.mu.Lock()
 		defer dc.mu.Unlock()
 		if dc.err == nil {
-			dc.err = errors.New("deadline exceeded")
+			dc.err = ErrDeadlineExceeded
 			close(dc.done)
 		}
 	})

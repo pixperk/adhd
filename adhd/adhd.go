@@ -1,8 +1,13 @@
 package adhd
 
-import "time"
+import (
+	"errors"
+	"time"
+)
 
-//ADHD is similar to go's context package
+var ErrCanceled = errors.New("context canceled")
+var ErrDeadlineExceeded = errors.New("context deadline exceeded")
+
 type ADHD interface {
 	Done() <-chan struct{}
 	Err() error
