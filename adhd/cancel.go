@@ -22,7 +22,7 @@ func WithCancel(parent ADHD) (ADHD, func()) {
 	cancel := func() {
 		c.mu.Lock()
 		defer c.mu.Unlock()
-		if c.err != nil {
+		if c.err == nil {
 			c.err = errors.New("context canceled")
 			close(c.done)
 		}

@@ -32,3 +32,7 @@ func WithTimeout(parent ADHD, d time.Duration) (ADHD, func()) {
 		cancel()
 	}
 }
+
+func (dc *deadlineCtx) Deadline() (deadline time.Time, ok bool) {
+	return dc.deadline, true
+}
