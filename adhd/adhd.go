@@ -1,4 +1,4 @@
-package main
+package adhd
 
 import "time"
 
